@@ -1,22 +1,23 @@
-import "./App.css";
-import styled from "styled-components";
-import { AccountBox } from "./components/accountBox";
+import { Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import { Helmet } from "react-helmet";
+// Screens
+import Landing from "./pages/Landing.jsx";
 
-const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-function App() {
+const App = () => {
   return (
-    <AppContainer>
-      <AccountBox />
-    </AppContainer>
+    <>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      <Helmet>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Khula:wght@400;600;800&display=swap" rel="stylesheet" />
+      </Helmet>
+    </>
   );
-}
+};
 
 export default App;
