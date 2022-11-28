@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
+import RegisterPage from './pages/RegisterPage';
 import { Helmet } from "react-helmet";
 // Screens
 import Landing from "./pages/Landing.jsx";
@@ -10,6 +11,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterPage />} />
+        
       </Routes>
       <Helmet>
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -143,9 +143,9 @@ export function AccountBox(props) {
           )}
           {active === "signup" && (
             <HeaderContainer>
-              <HeaderText>Create</HeaderText>
-              <HeaderText>Account</HeaderText>
-              <SmallText>Please sign-up to continue!</SmallText>
+              <HeaderText>USPACE가</HeaderText>
+              <HeaderText>궁금하다면?</HeaderText>
+              <SmallText>지금 바로 가입하세요!</SmallText>
             </HeaderContainer>
           )}
         </TopContainer>

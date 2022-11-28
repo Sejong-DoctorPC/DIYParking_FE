@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TopNavbar from "../components/Nav/TopNavbar";
 import { AccountBox } from "../components/accountBox";
 
+
 const LoginContainer = styled.div`
   width: 100%;
   height: 100%;

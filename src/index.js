@@ -7,11 +7,14 @@ import "./style/flexboxgrid.min.css";
 import './style/index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from "./context/AuthProvider";
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </BrowserRouter>,
   document.getElementById('root')
 );
