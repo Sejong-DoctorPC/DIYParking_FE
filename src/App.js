@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import RegisterPage from './pages/RegisterPage';
 import Parking from './pages/Parking';
+import ParkingGet from './pages/ParkingGet';
 
 import { Helmet } from "react-helmet";
 // Screens
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/parking" element={<Parking/>} />
+        <Route path="/parking-get" element={<ParkingGet/>} />
         
       </Routes>
       <Helmet>
