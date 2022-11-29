@@ -56,12 +56,12 @@ export const Input = styled.input`
 
 export const SubmitButton = styled.button`
   width: 100%;
-  padding: 11px 40%;
+  padding: 11px 10%;
   color: #fff;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 600;
   border: none;
-  border-radius: 100px 100px 100px 100px;
+  border-radius: 50px 50px 50px 50px;
   cursor: pointer;
   transition: all, 240ms ease-in-out;
   background: rgb(241, 196, 15);

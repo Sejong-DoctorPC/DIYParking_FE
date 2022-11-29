@@ -72,13 +72,14 @@ export function SignupForm(props) {
 			setErrMsg('Invalid Entry');
 			return;
 		}
+    console.log(JSON.stringify({ user, pwd }));
 		try {
 			const response = await axios.post(
 				REGISTER_URL,
 				JSON.stringify({ user, pwd }),
 				{
 					headers: { 'Content-Type': 'application/json' },
-					withCredentials: true,
+					//withCredentials: true,
           
 				}
 			);
