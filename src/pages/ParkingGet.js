@@ -17,6 +17,7 @@ function ParkingGet() {
         // loading 상태를 true 로 바꿉니다.
         setLoading(true);
         const response = await axios.get(PARKING_URL);
+        console.log(response);
         setCars(response.data); // 데이터는 response.data 안에 들어있습니다.
       } catch (e) {
         setError(e);
