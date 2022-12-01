@@ -14,6 +14,7 @@ import AuthContext from '../../context/AuthProvider';
 import axios from '../../api/axios';
 const LOGIN_URL = '/login';
 
+
 export default class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -21,31 +22,41 @@ export default class LoginForm extends Component {
       user: "",
       pwd: "",
     };
+    this.errMessage = '';
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e) {
     e.preventDefault();
+
     const { user, pwd } = this.state;
+
     console.log(user, pwd);
-    
-    const ress = axios.post(
-      LOGIN_URL, 
-      JSON.stringify({ user,pwd,}),
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "userRegister");
-        if (data.status == "ok") {
-          alert("login successful");
-          window.localStorage.setItem("token", data.data);
-          window.location.href = "./userDetails";
+    try {
+      const response = axios.post(
+        LOGIN_URL, 
+        JSON.stringify({ user,pwd,}),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        })
+        console.log(JSON.stringify(response?.data));
+
+        alert("login successful");
+        window.localStorage.setItem("token", response?.data);
+        //window.location.href = "./userDetails";
+
+      } catch(err) {
+        if (!err?.response) {
+          this.errMessage = 'No Server Response';
+        } else if (err.response?.status === 409) {
+          this.errMessage = 'Username Taken';
+        } else {
+          this.errMessage = 'Login Failed';
         }
-      });
+        console.log(this.errMessage);
+    }
   }
   render() {
     return (
