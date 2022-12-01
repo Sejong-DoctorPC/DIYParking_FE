@@ -38,6 +38,7 @@ function ParkingGet() {
       // 드디어 users가 성공적으로 받아와 진 상태입니다.
     return (
         <div>
+            <div>cars</div>
           <ul>
             {cars.map(car => (
               <li key={car._id}>
