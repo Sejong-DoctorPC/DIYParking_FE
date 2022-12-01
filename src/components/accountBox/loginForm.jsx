@@ -15,24 +15,19 @@ import axios from '../../api/axios';
 const LOGIN_URL = '/login';
 
 
-export default class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: "",
-      pwd: "",
-    };
-    this.errMessage = '';
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleSubmit(e) {
+export function LoginForm(props) {
+  const { switchToSignup } = useContext(AccountContext);
+	const [user, setUser] = useState('');
+	const [pwd, setPwd] = useState('');
+	const [errMsg, setErrMsg] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { user, pwd } = this.state;
+    console.log(JSON.stringify({ user, pwd }));
 
-    console.log(user, pwd);
     try {
-      const response = axios.post(
+      const response = await axios.post(
         LOGIN_URL, 
         JSON.stringify({ user,pwd,}),
         {
@@ -46,42 +41,41 @@ export default class LoginForm extends Component {
         alert("login successful");
         window.localStorage.setItem("token", response?.data);
         //window.location.href = "./userDetails";
-
+        setUser('');
+        setPwd('');
+  
       } catch(err) {
         if (!err?.response) {
-          this.errMessage = 'No Server Response';
+          errMsg = 'No Server Response';
         } else if (err.response?.status === 409) {
-          this.errMessage = 'Username Taken';
+          errMsg = 'Username Taken';
         } else {
-          this.errMessage = 'Login Failed';
+          errMsg = 'Login Failed';
         }
-        console.log(this.errMessage);
+        console.log(errMsg);
+    } finally {
+      setErrMsg('');
     }
-  }
-  render() {
-    return (
+  };
+  return (
       <BoxContainer>
-      <form onSubmit={this.handleSubmit}>
-        <h3>Sign In</h3>
-
+      <FormContainer onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label>user address</label>
-          <input
+          <Input
             type="user"
             className="form-control"
             placeholder="Enter user"
-            onChange={(e) => this.setState({ user: e.target.value })}
-          />
+            onChange={(e) => setUser(e.target.value)}
+            />
         </div>
 
         <div className="mb-3">
-          <label>Password</label>
-          <input
+          <Input
             type="password"
             className="form-control"
             placeholder="Enter password"
-            onChange={(e) => this.setState({ pwd: e.target.value })}
-          />
+            onChange={(e) => setPwd(e.target.value)}
+            />
         </div>
 
         <div className="mb-3">
@@ -98,23 +92,19 @@ export default class LoginForm extends Component {
         </div>
 
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
+          <SubmitButton type="submit" className="btn btn-primary">
+            로그인
+          </SubmitButton>
         </div>
-        <p className="forgot-password text-right">
-          <a href="/sign-up">Sign Up</a>
-        </p>
-      </form>
+      </FormContainer>
       <MutedLink href="#">
-        Don't have an accoun?{" "}
+        아직 계정이 없으시다면?
         <BoldLink href="#" onClick={switchToSignup}>
-          Signup
+          회원가입
         </BoldLink>
       </MutedLink>
       </BoxContainer>
       
     );
-  }
 }
 
