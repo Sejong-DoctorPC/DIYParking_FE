@@ -83,7 +83,7 @@ export function SignupForm(props) {
           
 				}
 			);
-      console.log(JSON.stringify(response?.data));
+      			//console.log(JSON.stringify(response?.data));
 
 
       /*
