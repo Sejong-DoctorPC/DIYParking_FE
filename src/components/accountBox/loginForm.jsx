@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, { Component, useRef, useState, useEffect, useContext } from 'react';
 import {
   BoldLink,
   BoxContainer,
@@ -12,100 +12,89 @@ import { AccountContext } from "./accountContext";
 import AuthContext from '../../context/AuthProvider';
 
 import axios from '../../api/axios';
-const LOGIN_URL = '/auth';
+const LOGIN_URL = '/login';
 
+export default class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: "",
+      pwd: "",
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    const { user, pwd } = this.state;
+    console.log(user, pwd);
+    
+    const ress = axios.post(
+      LOGIN_URL, 
+      JSON.stringify({ user,pwd,}),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "userRegister");
+        if (data.status == "ok") {
+          alert("login successful");
+          window.localStorage.setItem("token", data.data);
+          window.location.href = "./userDetails";
+        }
+      });
+  }
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <h3>Sign In</h3>
 
-export function LoginForm(props) {
-  const { switchToSignup } = useContext(AccountContext);
-	const { setAuth } = useContext(AuthContext);
-	const userRef = useRef();
-	const errRef = useRef();
+        <div className="mb-3">
+          <label>user address</label>
+          <input
+            type="user"
+            className="form-control"
+            placeholder="Enter user"
+            onChange={(e) => this.setState({ user: e.target.value })}
+          />
+        </div>
 
-	const [user, setUser] = useState('');
-	const [pwd, setPwd] = useState('');
-	const [errMsg, setErrMsg] = useState('');
-	const [success, setSuccess] = useState(false);
+        <div className="mb-3">
+          <label>Password</label>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Enter password"
+            onChange={(e) => this.setState({ pwd: e.target.value })}
+          />
+        </div>
 
-	useEffect(() => {
-		userRef.current.focus();
-	}, []);
+        <div className="mb-3">
+          <div className="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="customCheck1"
+            />
+            <label className="custom-control-label" htmlFor="customCheck1">
+              Remember me
+            </label>
+          </div>
+        </div>
 
-	useEffect(() => {
-		setErrMsg('');
-	}, [user, pwd]);
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-
-		try {
-			const response = await axios.post(
-				LOGIN_URL,
-				JSON.stringify({ user, pwd }),
-				{
-					headers: { 'Content-Type': 'application/json' },
-					withCredentials: true,
-				}
-			);
-
-			const accessToken = response?.data?.accessToken;
-			const roles = response?.data?.roles;
-			setAuth({ user, pwd, roles, accessToken });
-			setUser('');
-			setPwd('');
-			setSuccess(true);
-		} catch (err) {
-			if (!err?.response) {
-				setErrMsg('No Server Response');
-			} else if (err.response?.status === 400) {
-				setErrMsg('Missing Username or Password');
-			} else if (err.response?.status === 401) {
-				setErrMsg('Unauthorized');
-			} else {
-				setErrMsg('Login Failed');
-			}
-			errRef.current.focus();
-		}
-	};
-
-  return (
-
-    <BoxContainer>
-					<p
-						ref={errRef}
-						className={errMsg ? 'errmsg' : 'offscreen'}
-						aria-live="assertive"
-					>
-						{errMsg}
-					</p>
-      <FormContainer onSubmit={handleSubmit}>
-        <Input type="text" 
-                id="username"
-                ref={userRef}
-                autoComplete="off"
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
-                placeholder="차량 번호를 입력하세요" 
-                required />
-        <Input type="password"
-               id="password"
-               onChange={(e) => setPwd(e.target.value)}
-               value={pwd}
-               placeholder="비밀번호를 입력하세요" 
-               required                
-               />
-        <SubmitButton type="submit">로그인</SubmitButton>
-
-      </FormContainer>
-      <Marginer direction="vertical" margin={10} />
-      <MutedLink href="#">비밀번호 찾기</MutedLink>
-      <Marginer direction="vertical" margin="1.6em" />
-      <Marginer direction="vertical" margin="1em" />
-      <MutedLink href="#">
-        아직 계정이 없으신가요?{" "}
-        <BoldLink href="#" onClick={switchToSignup}>
-          회원가입
-        </BoldLink>
-      </MutedLink>
-    </BoxContainer>
-  );
+        <div className="d-grid">
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </div>
+        <p className="forgot-password text-right">
+          <a href="/sign-up">Sign Up</a>
+        </p>
+      </form>
+    );
+  }
 }
+
