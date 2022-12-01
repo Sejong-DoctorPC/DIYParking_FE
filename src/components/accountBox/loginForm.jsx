@@ -60,6 +60,7 @@ export default class LoginForm extends Component {
   }
   render() {
     return (
+      <BoxContainer>
       <form onSubmit={this.handleSubmit}>
         <h3>Sign In</h3>
 
@@ -105,6 +106,14 @@ export default class LoginForm extends Component {
           <a href="/sign-up">Sign Up</a>
         </p>
       </form>
+      <MutedLink href="#">
+        Don't have an accoun?{" "}
+        <BoldLink href="#" onClick={switchToSignup}>
+          Signup
+        </BoldLink>
+      </MutedLink>
+      </BoxContainer>
+      
     );
   }
 }
