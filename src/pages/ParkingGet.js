@@ -17,7 +17,7 @@ function ParkingGet() {
         // loading 상태를 true 로 바꿉니다.
         setLoading(true);
         const response = await axios.get(PARKING_URL);
-        console.log(response);
+        //console.log(response);
         setCars(response.data); // 데이터는 response.data 안에 들어있습니다.
       } catch (e) {
         setError(e);
@@ -40,8 +40,8 @@ function ParkingGet() {
         <div>
           <ul>
             {cars.map(car => (
-              <li key={car.id}>
-                {car.username} ({car.name})
+              <li key={car._id}>
+                {car.zone} ({car.type})
               </li>
             ))}
           </ul>
