@@ -91,12 +91,10 @@ export function SignupForm(props) {
           'Content-type': 'application/json'
       },
         body: JSON.stringify({ user, pwd })
-      })
-      // .then(response => console.log("response"))
-        .then(response => response.json())
+      }).then(response => response.json())
 
 			// TODO: remove console.logs before deployment
-			console.log(JSON.stringify(response?.data));
+			//console.log(JSON.stringify(response?.data));
 			setSuccess(true);
 			//clear state and controlled inputs
 			setUser('');
