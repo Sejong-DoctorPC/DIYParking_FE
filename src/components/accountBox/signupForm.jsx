@@ -79,7 +79,7 @@ export function SignupForm(props) {
 				JSON.stringify({ user, pwd }),
 				{
 					headers: { 'Content-Type': 'application/json' },
-					withCredentials: true,
+					//withCredentials: true,
           
 				}
 			);
