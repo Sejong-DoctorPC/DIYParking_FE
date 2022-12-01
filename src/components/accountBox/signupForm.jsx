@@ -74,7 +74,6 @@ export function SignupForm(props) {
 		}
     console.log(JSON.stringify({ user, pwd }));
 		try {
-      /*
 			const response = await axios.post(
 				REGISTER_URL,
 				JSON.stringify({ user, pwd }),
@@ -84,7 +83,10 @@ export function SignupForm(props) {
           
 				}
 			);
-      */
+      console.log(JSON.stringify(response?.data));
+
+
+      /*
       fetch("https://sejong-uspace.herokuapp.com/join", {
         method: "POST",
         headers: {
@@ -92,9 +94,8 @@ export function SignupForm(props) {
       },
         body: JSON.stringify({ user, pwd })
       }).then(response => response.json())
-
+*/
 			// TODO: remove console.logs before deployment
-			//console.log(JSON.stringify(response?.data));
 			setSuccess(true);
 			//clear state and controlled inputs
 			setUser('');
