@@ -18,8 +18,8 @@ class LoginForm extends Component {
   }
 
   loginRequestHandler() {
-    axios
-      .post(
+    try {
+      axios.post(
         // 로그인을 위한 포스트 요청
         "https://sejong-uspace.herokuapp.com/login",
         {
@@ -29,23 +29,10 @@ class LoginForm extends Component {
           pwd: this.state.pwd,
         },
         { "Content-Type": "application/json" }
-      )
-      .then((res) => {
-        this.props.loginHandler(true);
-        // 유저 정보를 받기 위한 get 요청을 순서대로 진행
-        //return axios.get("https://localhost:4000/users/userinfo", {
-        //  withCredentials: true,
-        //});
-      })
-      .then((res) => {
-        let { userId, email } = res.data.data;
-        this.props.setUserInfo({
-          // user data 상태 변경
-          userId,
-          email,
-        });
-      })
-      .catch((err) => alert(err));
+      );
+    } catch (err) {
+      alert(err);
+    }
   }
 
   render() {
