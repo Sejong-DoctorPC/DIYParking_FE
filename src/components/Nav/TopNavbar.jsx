@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-scroll";
 // Components
 import Sidebar from "../Nav/Sidebar";
-import Backdrop from "../Elements/Backdrop";
+import Backdrop from  "../Elements/Backdrop";
 // Assets
 import LogoIcon from "../../assets/svg/Logo";
 import BurgerIcon from "../../assets/svg/BurgerIcon";
@@ -32,7 +32,7 @@ export default function TopNavbar() {
         "Content-Type": "application/json",
         //withCredentials: true,
         })
-        localStorage.removeItem("Log");
+        localStorage.setItem("Log", false);
     } catch(err) {
       console.log(err);
     }
@@ -45,7 +45,7 @@ export default function TopNavbar() {
       {sidebarOpen && <Backdrop toggleSidebar={toggleSidebar} />}
       <Wrapper className="flexCenter animate whiteBg" style={y > 100 ? { height: "60px" } : { height: "80px" }}>
         <NavInner className="container flexSpaceCenter">
-          <Link className="pointer flexNullCenter" to="home" smooth={true}>
+          <Link className="pointer flexNullCenter" to="/" smooth={true}>
             <LogoIcon />
             <h1 style={{ marginLeft: "15px" }} className="font20 extraBold">
               USPACE
@@ -56,7 +56,7 @@ export default function TopNavbar() {
           </BurderWrapper>
           <UlWrapper className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="home" spy={true} smooth={true} offset={-80}>
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="/" spy={true} smooth={true} offset={-80}>
                 메인홈
               </Link>
             </li>
