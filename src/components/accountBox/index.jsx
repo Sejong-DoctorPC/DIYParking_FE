@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { LoginForm } from "./loginForm";
+import LoginForm from "./loginForm";
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
@@ -62,7 +62,7 @@ const HeaderText = styled.h2`
 
 const SmallText = styled.h5`
   color: black;
-  font-weight:  bold;
+  font-weight: bold;
   font-size: 15px;
   z-index: 10;
   margin: 0;
