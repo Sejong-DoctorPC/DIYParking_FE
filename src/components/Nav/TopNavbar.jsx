@@ -24,7 +24,8 @@ export default function TopNavbar() {
 
   const isLoggedIn = localStorage.getItem("Log");
 
-  const handleLogout = () => {
+  const handleLogout  = async (e) => {
+    e.preventDefault();
     try {
       localStorage.clear();
     // 로그아웃을 위한 메소드 제작
@@ -34,7 +35,7 @@ export default function TopNavbar() {
         //withCredentials: true,
         })
       window.location.replace('/');
-  
+      alert('로그아웃 성공!');
     } catch(err) {
       console.log(err);
     }
