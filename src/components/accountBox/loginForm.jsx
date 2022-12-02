@@ -5,8 +5,8 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "", // 이벤트로 전달될 username
-      password: "", // 이벤트로 전달될 password
+      user: "", // 이벤트로 전달될 username
+      pwd: "", // 이벤트로 전달될 password
     };
     this.inputHandler = this.inputHandler.bind(this);
     this.loginRequestHandler = this.loginRequestHandler.bind(this);
@@ -25,8 +25,8 @@ class LoginForm extends Component {
         {
           // 서버의 login 컨트롤러의 객체 key의 명칭으로 인해 여기서도 'userId' 사용
           // 여기서 key 명칭을 userId가 아닌 username으로 하면 에러 발생
-          userId: this.state.username,
-          password: this.state.password,
+          user: this.state.user,
+          pwd: this.state.pwd,
         },
         { "Content-Type": "application/json" }
       )
@@ -54,18 +54,18 @@ class LoginForm extends Component {
         <div className="inputField">
           <div>Username</div>
           <input
-            name="username"
+            name="user"
             onChange={(e) => this.inputHandler(e)}
-            value={this.state.username}
+            value={this.state.user}
             type="text"
           />
         </div>
         <div className="inputField">
           <div>Password</div>
           <input
-            name="password"
+            name="pwd"
             onChange={(e) => this.inputHandler(e)}
-            value={this.state.password}
+            value={this.state.pwd}
             type="password"
           />
         </div>
