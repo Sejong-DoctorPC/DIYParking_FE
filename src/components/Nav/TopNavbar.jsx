@@ -19,6 +19,7 @@ export default function TopNavbar() {
     };
   }, [y]);
 
+  const isLoggedIn = localStorage.getItem("Log");
 
   return (
     <>
@@ -65,7 +66,7 @@ export default function TopNavbar() {
           <UlWrapperRight className="flexNullCenter">
             <li className="semiBold font15 pointer">
               <a href="/login" style={{ padding: "10px 30px 10px 0" }}>
-                로그인
+               {isLoggedIn ? <span>로그아웃</span> : <span>로그인</span>}
               </a>
             </li>
             <li className="semiBold font15 pointer flexCenter">
