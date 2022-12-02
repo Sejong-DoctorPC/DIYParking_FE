@@ -4,7 +4,7 @@ function Logout(props) {
   const handleLogout = () => {
     // 로그아웃을 위한 메소드 제작
     axios
-      .post("https://sejong-uspace.herokuapp.com/user/logout", null, {
+      .get("https://sejong-uspace.herokuapp.com/user/logout", null, {
         "Content-Type": "application/json",
         //withCredentials: true,
       })
