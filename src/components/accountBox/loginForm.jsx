@@ -1,69 +1,89 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component, useRef, useState, useEffect, useContext } from 'react';
+import {
+  BoldLink,
+  BoxContainer,
+  FormContainer,
+  Input,
+  MutedLink,
+  SubmitButton,
+} from "./common";
+import { Marginer } from "../marginer";
+import { AccountContext } from "./accountContext";
 
-class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: "", // 이벤트로 전달될 username
-      pwd: "", // 이벤트로 전달될 password
-    };
-    this.inputHandler = this.inputHandler.bind(this);
-    this.loginRequestHandler = this.loginRequestHandler.bind(this);
-  }
+import axios from '../../api/axios';
+const LOGIN_URL = '/login';
 
-  inputHandler(e) {
-    // username과 password 입력을 위한 이벤트 핸들러
-    this.setState({ [e.target.name]: e.target.value });
-  }
+export function LoginForm() {
 
-  loginRequestHandler() {
-    try {
-      axios.post(
-        // 로그인을 위한 포스트 요청
-        "https://sejong-uspace.herokuapp.com/login",
-        {
-          // 서버의 login 컨트롤러의 객체 key의 명칭으로 인해 여기서도 'userId' 사용
-          // 여기서 key 명칭을 userId가 아닌 username으로 하면 에러 발생
-          user: this.state.user,
-          pwd: this.state.pwd,
-        },
-        { "Content-Type": "application/json" }
-      );
-    } catch (err) {
-      alert(err);
-    }
-  }
+  const { switchToSignin } = useContext(AccountContext);
+	const [user, setUser] = useState('');
+	const [pwd, setPwd] = useState('');
+	const [errMsg, setErrMsg] = useState('');
 
-  render() {
-    return (
-      <div className="loginContainer">
-        <div className="inputField">
-          <div>Username</div>
-          <input
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+      try {
+        const response = await axios.post(
+          LOGIN_URL, 
+          JSON.stringify({ user,pwd,}),
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+        });
+        console.log(JSON.stringify(response?.data));
+
+        alert("로그인 성공!");
+        window.localStorage.setItem("token", response?.data);
+        //window.location.href = "./userDetails";
+        setUser('');
+        setPwd('');
+
+        window.location.replace("/");
+    
+      } catch(err) {
+        if (!err?.response) {
+          setErrMsg('No Server Response');
+        } else if (err.response?.status === 409) {
+          setErrMsg('Username Taken');
+        } else {
+          setErrMsg('Login Failed');
+        }
+        console.log(errMsg);
+      } finally {
+        setErrMsg('');
+      }
+  };
+  
+  return (
+      <BoxContainer>
+        <FormContainer onSubmit={handleSubmit}>
+          <Input
             name="user"
-            onChange={(e) => this.inputHandler(e)}
-            value={this.state.user}
+            onChange={(e) => setUser(e.target.value)}
+            value={user}
             type="text"
           />
-        </div>
-        <div className="inputField">
-          <div>Password</div>
-          <input
+          <Input
             name="pwd"
-            onChange={(e) => this.inputHandler(e)}
-            value={this.state.pwd}
+            onChange={(e) => setPwd(e.target.value)}
+            value={pwd}
             type="password"
           />
-        </div>
-        <div className="passwordField">
-          <button onClick={this.loginRequestHandler} className="loginBtn">
+          <SubmitButton type="submit">
             Login
-          </button>
-        </div>
-      </div>
+          </SubmitButton>
+        </FormContainer>
+      <Marginer direction="vertical" margin={10} />
+      <Marginer direction="vertical" margin="1em" />
+      <MutedLink href="#">
+        아직 계정이 없으신가요?
+        <BoldLink href="#" onClick={switchToSignin}>
+          회원가입
+        </BoldLink>
+      </MutedLink>
+    </BoxContainer>
     );
   }
-}
 
-export default LoginForm;
