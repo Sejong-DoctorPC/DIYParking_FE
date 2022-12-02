@@ -32,7 +32,8 @@ export default function TopNavbar() {
         "Content-Type": "application/json",
         //withCredentials: true,
         })
-        localStorage.setItem("Log", false);
+      localStorage.clear();
+      window.location.replace('/');
     } catch(err) {
       console.log(err);
     }
