@@ -1,110 +1,82 @@
-import React, { Component, useRef, useState, useEffect, useContext } from 'react';
-import {
-  BoldLink,
-  BoxContainer,
-  FormContainer,
-  Input,
-  MutedLink,
-  SubmitButton,
-} from "./common";
-import { Marginer } from "../marginer";
-import { AccountContext } from "./accountContext";
-import AuthContext from '../../context/AuthProvider';
+import React, { Component } from "react";
+import axios from "axios";
 
-import axios from '../../api/axios';
-const LOGIN_URL = '/login';
+class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "", // 이벤트로 전달될 username
+      password: "", // 이벤트로 전달될 password
+    };
+    this.inputHandler = this.inputHandler.bind(this);
+    this.loginRequestHandler = this.loginRequestHandler.bind(this);
+  }
 
+  inputHandler(e) {
+    // username과 password 입력을 위한 이벤트 핸들러
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
-export function LoginForm(props) {
-  const { switchToSignup } = useContext(AccountContext);
-	const [user, setUser] = useState('');
-	const [pwd, setPwd] = useState('');
-	const [errMsg, setErrMsg] = useState('');
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    console.log(JSON.stringify({ user, pwd }));
-
-    try {
-      const response = await axios.post(
-        LOGIN_URL, 
-        JSON.stringify({ user,pwd,}),
+  loginRequestHandler() {
+    axios
+      .post(
+        // 로그인을 위한 포스트 요청
+        "https://sejong-uspace.herokuapp.com/login",
         {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        })
-        console.log(JSON.stringify(response?.data));
+          // 서버의 login 컨트롤러의 객체 key의 명칭으로 인해 여기서도 'userId' 사용
+          // 여기서 key 명칭을 userId가 아닌 username으로 하면 에러 발생
+          userId: this.state.username,
+          password: this.state.password,
+        },
+        { "Content-Type": "application/json", withCredentials: true }
+      )
+      .then((res) => {
+        this.props.loginHandler(true);
+        // 유저 정보를 받기 위한 get 요청을 순서대로 진행
+        return axios.get("https://localhost:4000/users/userinfo", {
+          withCredentials: true,
+        });
+      })
+      .then((res) => {
+        let { userId, email } = res.data.data;
+        this.props.setUserInfo({
+          // user data 상태 변경
+          userId,
+          email,
+        });
+      })
+      .catch((err) => alert(err));
+  }
 
-        alert("login successful");
-        window.localStorage.setItem("token", response?.data);
-        //window.location.href = "./userDetails";
-        setUser('');
-        setPwd('');
-  
-      } catch(err) {
-        if (!err?.response) {
-          errMsg = 'No Server Response';
-        } else if (err.response?.status === 409) {
-          errMsg = 'Username Taken';
-        } else {
-          errMsg = 'Login Failed';
-        }
-        console.log(errMsg);
-    } finally {
-      setErrMsg('');
-    }
-  };
-  return (
-      <BoxContainer>
-      <FormContainer onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <Input
-            type="user"
-            className="form-control"
-            placeholder="Enter user"
-            onChange={(e) => setUser(e.target.value)}
-            />
+  render() {
+    return (
+      <div className="loginContainer">
+        <div className="inputField">
+          <div>Username</div>
+          <input
+            name="username"
+            onChange={(e) => this.inputHandler(e)}
+            value={this.state.username}
+            type="text"
+          />
         </div>
-
-        <div className="mb-3">
-          <Input
+        <div className="inputField">
+          <div>Password</div>
+          <input
+            name="password"
+            onChange={(e) => this.inputHandler(e)}
+            value={this.state.password}
             type="password"
-            className="form-control"
-            placeholder="Enter password"
-            onChange={(e) => setPwd(e.target.value)}
-            />
+          />
         </div>
-
-        <div className="mb-3">
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck1"
-            />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
-            </label>
-          </div>
+        <div className="passwordField">
+          <button onClick={this.loginRequestHandler} className="loginBtn">
+            Login
+          </button>
         </div>
-
-        <div className="d-grid">
-          <SubmitButton type="submit" className="btn btn-primary">
-            로그인
-          </SubmitButton>
-        </div>
-      </FormContainer>
-      <MutedLink href="#">
-        아직 계정이 없으시다면?
-        <BoldLink href="#" onClick={switchToSignup}>
-          회원가입
-        </BoldLink>
-      </MutedLink>
-      </BoxContainer>
-      
+      </div>
     );
+  }
 }
 
+export default LoginForm;
