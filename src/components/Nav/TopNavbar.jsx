@@ -27,15 +27,15 @@ export default function TopNavbar() {
   const handleLogout  = async (e) => {
     e.preventDefault();
     try {
-      localStorage.clear();
     // 로그아웃을 위한 메소드 제작
       axios
       .get(LOGOUT_URL, null, {
         "Content-Type": "application/json",
         //withCredentials: true,
         })
-      window.location.replace('/');
       alert('로그아웃 성공!');
+      localStorage.clear();
+      window.location.replace('/');
     } catch(err) {
       console.log(err);
     }
@@ -86,7 +86,7 @@ export default function TopNavbar() {
           </UlWrapper>
           <UlWrapperRight className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              {isLoggedIn ?  <a href="/" style={{ padding: "10px 30px 10px 0" }}>로그아웃 </a> : <a href="/login" style={{ padding: "10px 30px 10px 0"}} onClick={handleLogout}>로그인</a>}
+              {isLoggedIn ?  <a href="/" style={{ padding: "10px 30px 10px 0" }}>로그아웃 </a> : <a href="/login" style={{ padding: "10px 30px 10px 0"}}><button onClick={handleLogout}>로그인</button></a>}
             </li>
             <li className="semiBold font15 pointer flexCenter">
               <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
