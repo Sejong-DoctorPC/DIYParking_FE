@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
+import Logout from './pages/Logout';
 import RegisterPage from './pages/RegisterPage';
 import Parking from './pages/Parking';
 import ParkingGet from './pages/ParkingGet';
@@ -30,7 +31,7 @@ const App = () => {
         element = { < ParkingGet / > }
         /> <
         Route path = "/logout"
-        element = { < ParkingGet / > }
+        element = { < Logout / > }
         />
 
         <
