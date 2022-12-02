@@ -8,6 +8,9 @@ import Backdrop from "../Elements/Backdrop";
 import LogoIcon from "../../assets/svg/Logo";
 import BurgerIcon from "../../assets/svg/BurgerIcon";
 
+import axios from '../../api/axios';
+const LOGOUT_URL = '/users/logout';
+
 export default function TopNavbar() {
   const [y, setY] = useState(window.scrollY);
   const [sidebarOpen, toggleSidebar] = useState(false);
@@ -20,6 +23,21 @@ export default function TopNavbar() {
   }, [y]);
 
   const isLoggedIn = localStorage.getItem("Log");
+
+  const handleLogout = () => {
+    try {
+    // 로그아웃을 위한 메소드 제작
+      axios
+      .get(LOGOUT_URL, null, {
+        "Content-Type": "application/json",
+        //withCredentials: true,
+        })
+        localStorage.removeItem("Log");
+    } catch(err) {
+      console.log(err);
+    }
+
+  };
 
   return (
     <>
@@ -65,9 +83,7 @@ export default function TopNavbar() {
           </UlWrapper>
           <UlWrapperRight className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              <a href="/login" style={{ padding: "10px 30px 10px 0" }}>
-               {isLoggedIn ? <span>로그아웃</span> : <span>로그인</span>}
-              </a>
+              {isLoggedIn ?  <a href="/login" style={{ padding: "10px 30px 10px 0" }}>로그아웃 </a> : <a href="/" style={{ padding: "10px 30px 10px 0"}} onClick={handleLogout}>로그인</a>}
             </li>
             <li className="semiBold font15 pointer flexCenter">
               <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>

@@ -1,10 +1,11 @@
-import axios from "axios";
+import axios from '../../api/axios';
+const LOGOUT_URL = '/users/logout';
 
 function Logout(props) {
   const handleLogout = () => {
     // 로그아웃을 위한 메소드 제작
     axios
-      .get("https://sejong-uspace.herokuapp.com/users/logout", null, {
+      .get(LOGOUT_URL, null, {
         "Content-Type": "application/json",
         //withCredentials: true,
       })
