@@ -26,14 +26,15 @@ export default function TopNavbar() {
 
   const handleLogout = () => {
     try {
+      localStorage.clear();
     // 로그아웃을 위한 메소드 제작
       axios
       .get(LOGOUT_URL, null, {
         "Content-Type": "application/json",
         //withCredentials: true,
         })
-      localStorage.clear();
       window.location.replace('/');
+  
     } catch(err) {
       console.log(err);
     }
