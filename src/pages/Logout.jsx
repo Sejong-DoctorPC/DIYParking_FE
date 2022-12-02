@@ -12,9 +12,7 @@ function Logout(props) {
       .catch((e) => alert(e));
   };
 
-  return props.userData == null ? (
-    <div> Loading... </div>
-  ) : (
+  return  (
     <div>
       <div className="mypageContainer">
         <div>
