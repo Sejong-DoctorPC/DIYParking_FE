@@ -28,14 +28,14 @@ class LoginForm extends Component {
           userId: this.state.username,
           password: this.state.password,
         },
-        { "Content-Type": "application/json", withCredentials: true }
+        { "Content-Type": "application/json" }
       )
       .then((res) => {
         this.props.loginHandler(true);
         // 유저 정보를 받기 위한 get 요청을 순서대로 진행
-        return axios.get("https://localhost:4000/users/userinfo", {
-          withCredentials: true,
-        });
+        //return axios.get("https://localhost:4000/users/userinfo", {
+        //  withCredentials: true,
+        //});
       })
       .then((res) => {
         let { userId, email } = res.data.data;
