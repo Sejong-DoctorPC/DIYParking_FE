@@ -39,7 +39,7 @@ export function LoginForm() {
         //window.location.href = "./userDetails";
         setUser('');
         setPwd('');
-
+        localStorage.setItem("Log", true);
         window.location.replace("/");
     
       } catch(err) {
