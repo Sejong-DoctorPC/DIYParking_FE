@@ -18,8 +18,8 @@ export default function Header({history}) {
             USPACE: User Parking Space
           </HeaderP>
           <BtnWrapper>
-            <FullButton title="주차장 만들기" to="/parking"/>
-
+          <FullButton title="주차장 만들기" to="/admin/parking"/>
+          <FullButton title="주차장 현황" color="#E5B8F4" border="#E5B8F4" to="/parking"/>
           </BtnWrapper>
         </div>
       </LeftSide>

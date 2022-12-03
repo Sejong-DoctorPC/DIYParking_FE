@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import React, { useRef, useState, useEffect, useContext } from 'react';
 import styled from "styled-components";
+import Button from '@mui/material/Button';
 import "./Landing.css";
 
 const PARKING_SIZE = 36;
@@ -16,32 +17,7 @@ const Input = styled.input`
     color: gray;
   }
 `;
-const StyledButton = styled.button`
-  /* 공통 스타일 */
-  display: inline-flex;
-  outline: none;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  padding-left: 1rem;
-  padding-right: 1rem;
 
-  /* 크기 */
-  height: 2.25rem;
-  width: 7rem;
-
-  /* 색상 */
-  background: #228be6;
-  &:hover {
-    background: #339af0;
-  }
-  &:active {
-    background: #1c7ed6;
-  }
-
-`;
 
 export const Landing = ({ triggerTransition, setParkingSlotsCount }) => {
   const {
@@ -76,7 +52,7 @@ export const Landing = ({ triggerTransition, setParkingSlotsCount }) => {
             })}
           />
 
-          <StyledButton type="submit">주차장 생성</StyledButton>
+          <Button variant="contained" type="submit">주차장 생성</Button>
 
           {errors.parkingSize && (
             <p>

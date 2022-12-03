@@ -4,7 +4,7 @@ import TopNavbar from "../components/Nav/TopNavbar";
 import { AccountBox } from "../components/accountBox";
 
 
-const LoginContainer = styled.div`
+const LoginContainer = styled.div `
   width: 100%;
   height: 100%;
   display: flex;
@@ -15,14 +15,18 @@ const LoginContainer = styled.div`
 `;
 
 function Login() {
-  return (
-    <>
-      <TopNavbar />
-      <LoginContainer>
-        <AccountBox />
-      </LoginContainer>
-    </>
-  );
+    return ( <
+        >
+        <
+        TopNavbar / >
+        <
+        LoginContainer >
+        <
+        AccountBox / >
+        <
+        /LoginContainer> <
+        />
+    );
 }
 
 export default Login;

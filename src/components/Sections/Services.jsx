@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 // Components
-import ClientSlider from "../Elements/ClientSlider";
 import ServiceBox from "../Elements/ServiceBox";
 import FullButton from "../Buttons/FullButton";
 // Assets
@@ -12,12 +11,7 @@ import AddImage3 from "../../assets/img/add/3.png";
 export default function Services() {
   return (
     <Wrapper id="services">
-      <div className="lightBg" style={{ padding: "50px 0" }}>
-        <div className="container">
-          <ClientSlider />
-        </div>
-      </div>
-      <div className="whiteBg" style={{ padding: "60px 0" }}>
+      <div className="lightBg" style={{ padding: "60px 0" }}>
         <div className="container">
           <HeaderInfo>
             <h1 className="font40 extraBold">오직 USPACE에서 제공하는 서비스</h1>
@@ -51,7 +45,7 @@ export default function Services() {
             </ServiceBoxWrapper>
           </ServiceBoxRow>
         </div>
-        <div className="lightBg">
+        <div className="whiteBg">
           <div className="container">
             <Advertising className="flexSpaceCenter">
               <AddLeft>
