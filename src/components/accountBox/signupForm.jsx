@@ -8,13 +8,6 @@ import {
   SubmitButton,
 } from "./common";
 
-import {
-	faCheck,
-	faTimes,
-	faInfoCircle,
-} from '@fortawesome/free-solid-svg-icons';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import Home from "../../pages/Home";

@@ -21,32 +21,32 @@ export default function Services() {
         <div className="container">
           <HeaderInfo>
             <h1 className="font40 extraBold">오직 USPACE에서 제공하는 서비스</h1>
-            <p className="font13">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+            <p className="font16">
+              여러분은 주차장하면 어떤 생각이 떠오르나요?
               <br />
-              labore et dolore magna aliquyam erat, sed diam voluptua.
+              무엇을 상상하든, USPACE에서는 그 이상의 가치를 만나게 될 거예요.
             </p>
           </HeaderInfo>
           <ServiceBoxRow className="flex">
             <ServiceBoxWrapper>
               <ServiceBox
                 icon="roller"
-                title="목적1"
-                subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+                title="Objective1. 사고 예방"
+                subtitle="지정된 장소에 주차를 유도하여 군집화 해소 및 주차장에서 발생하는 사고를 예방합니다."
               />
             </ServiceBoxWrapper>
             <ServiceBoxWrapper>
               <ServiceBox
                 icon="monitor"
-                title="목적2"
-                subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore."
+                title="Objective2. 새로운 공간"
+                subtitle="주차공간을 시민을 위한 새로운 문화 공간으로 탈바꿈하여 가치를 창출합니다."
               />
             </ServiceBoxWrapper>
             <ServiceBoxWrapper>
               <ServiceBox
                 icon="browser"
-                title="목적3"
-                subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat."
+                title="Objective3. 다양한 사용자"
+                subtitle="장애인 주차공간을 유동적으로 보존하여, 사회적 약자의 편의에 기여합니다."
               />
             </ServiceBoxWrapper>
           </ServiceBoxRow>
@@ -55,18 +55,21 @@ export default function Services() {
           <div className="container">
             <Advertising className="flexSpaceCenter">
               <AddLeft>
-                <h4 className="font15 semiBold">A few words about company</h4>
-                <h2 className="font40 extraBold">A Study of Creativity</h2>
+                <h4 className="font15 semiBold">USPACE의 기능을 알아볼까요?</h4>
+                <h2 className="font40 extraBold">Creative Space for U</h2>
                 <p className="font12">
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-                  diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                  USPACE의 관리자 회원은 주차장의 모드를 다양하게 즐길 수 있답니다.
+                  <br></br>
+                  주차장은... 어쩌면 하나의 체험의 공간이 아닐까요?
+                  <br></br>
+                  ex. 일반 모드 차박 모드, 영화관 모드
                 </p>
                 <ButtonsRow className="flexNullCenter" style={{ margin: "30px 0"}}>
                   <div style={{ width: "190px" }}>
-                    <FullButton title="Get Started" action={() => alert("clicked")} />
+                    <FullButton title="주차장 만들기" action={() => alert("관리자 회원가입을 진행해주세요!")} />
                   </div>
                   <div style={{ width: "190px", marginLeft: "15px" }}>
-                    <FullButton title="Contact Us" action={() => alert("clicked")} border />
+                    <FullButton title="모드 구경하기" action={() => alert("어떤 모드를 원하세요?")} border />
                   </div>
                 </ButtonsRow>
               </AddLeft>

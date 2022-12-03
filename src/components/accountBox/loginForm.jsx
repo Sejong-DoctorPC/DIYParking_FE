@@ -15,7 +15,7 @@ const LOGIN_URL = '/login';
 
 export function LoginForm() {
 
-  const { switchToSignin } = useContext(AccountContext);
+  const { switchToSignup } = useContext(AccountContext);
 	const [user, setUser] = useState('');
 	const [pwd, setPwd] = useState('');
 	const [errMsg, setErrMsg] = useState('');
@@ -79,7 +79,7 @@ export function LoginForm() {
       <Marginer direction="vertical" margin="1em" />
       <MutedLink href="#">
         아직 계정이 없으신가요?
-        <BoldLink href="#" onClick={switchToSignin}>
+        <BoldLink href="#" onClick={switchToSignup}>
           회원가입
         </BoldLink>
       </MutedLink>
