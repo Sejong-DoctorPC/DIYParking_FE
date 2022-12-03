@@ -13,12 +13,13 @@ export default function Header({history}) {
       <LeftSide className="flexCenter">
         <div>
           <h1 className="extraBold font60">USPACE, <br></br>당신만의 공간</h1>
-          <HeaderP className="font13 semiBold">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-            voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+          <HeaderP className="font20 semiBold">
+            사용자 맞춤형 주차 공간 활용 서비스, USPACE <br></br> <br></br>
+            USPACE: User Parking Space
           </HeaderP>
           <BtnWrapper>
             <FullButton title="주차장 만들기" to="/parking"/>
+
           </BtnWrapper>
         </div>
       </LeftSide>
@@ -31,9 +32,9 @@ export default function Header({history}) {
             </QuotesWrapper>
             <div>
               <p className="font15 whiteColor">
-                <em>Friends, such as we desire, are dreams and fables. Friendship demands the ability to do without it.</em>
+                <em>USPACE(User Parking Space)는 주차장 기반의 IoT 시스템입니다. 사고를 예방하는 주차 시스템, 주차공간의 업사이클링이 바로 USPACE입니다. </em>
               </p>
-              <p className="font13 orangeColor textRight" style={{marginTop: '10px'}}>Ralph Waldo Emerson</p>
+              <p className="font13 orangeColor textRight" style={{marginTop: '10px'}}>팀 닥터피시</p>
             </div>
           </QuoteWrapper>
           <DotsWrapper>

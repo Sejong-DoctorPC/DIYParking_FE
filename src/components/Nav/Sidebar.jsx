@@ -108,13 +108,13 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
       </UlStyle>
       <UlStyle className="flexSpaceCenter">
         <li className="semiBold font15 pointer">
-          <a href="/" style={{ padding: "10px 30px 10px 0" }} className="whiteColor">
-            Log in
+          <a href="/login" style={{ padding: "10px 30px 10px 0" }} className="whiteColor">
+            로그인
           </a>
         </li>
         <li className="semiBold font15 pointer flexCenter">
           <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
-            Get Started
+            시작하기
           </a>
         </li>
       </UlStyle>

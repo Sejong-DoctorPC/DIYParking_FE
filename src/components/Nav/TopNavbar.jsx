@@ -48,18 +48,18 @@ export default function TopNavbar() {
       {sidebarOpen && <Backdrop toggleSidebar={toggleSidebar} />}
       <Wrapper className="flexCenter animate whiteBg" style={y > 100 ? { height: "60px" } : { height: "80px" }}>
         <NavInner className="container flexSpaceCenter">
-          <Link className="pointer flexNullCenter" to="/" smooth={true}>
+          <a className="pointer flexNullCenter" href="/">
             <LogoIcon />
             <h1 style={{ marginLeft: "15px" }} className="font20 extraBold">
               USPACE
             </h1>
-          </Link>
+          </a>
           <BurderWrapper className="pointer" onClick={() => toggleSidebar(!sidebarOpen)}>
             <BurgerIcon />
           </BurderWrapper>
           <UlWrapper className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="/" spy={true} smooth={true} offset={-80}>
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="home" spy={true} smooth={true} offset={-80}>
                 메인홈
               </Link>
             </li>
@@ -86,7 +86,7 @@ export default function TopNavbar() {
           </UlWrapper>
           <UlWrapperRight className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              {isLoggedIn ?  <a href="/" style={{ padding: "10px 30px 10px 0" }}><button onClick={handleLogout}>로그아웃 </button></a> : <a href="/login" style={{ padding: "10px 30px 10px 0"}}>로그인</a>}
+              {isLoggedIn ?  <a href="/" style={{ padding: "10px 30px 10px 0" }}><button  onClick={handleLogout} style={{ backgroundColor: "white" }}>로그아웃 </button></a> : <a href="/login" style={{ padding: "10px 30px 10px 0"}}>로그인</a>}
             </li>
             <li className="semiBold font15 pointer flexCenter">
               <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
