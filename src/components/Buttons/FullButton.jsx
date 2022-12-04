@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export default function FullButton({ title, action, border, to }) {
+export default function FullButton({ title, action, border, color, to }) {
   return (
     <Wrapper
       className="animate pointer radius8"
       onClick={action ? () => action() : null}
-      border={border}
+      border={border} color={color}
     > <Link to={to}>
       <Text>
       {title}
@@ -18,8 +18,8 @@ export default function FullButton({ title, action, border, to }) {
 }
 
 const Wrapper = styled.button`
-  border: 1px solid ${(props) => (props.border ? "#707070" : "#ffc320")};
-  background-color: ${(props) => (props.border ? "transparent" : "#ffc320")};
+  border: 1px solid ${(props) => (props.border ? props.border : "#ffc320")};
+  background-color: ${(props) => (props.color ? props.color : "#ffc320")};
   width: 100%;
   padding: 15px;
   outline: none;

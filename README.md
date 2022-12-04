@@ -20,7 +20,7 @@ https://uspace-sejong-doctorpc.netlify.app )
 * 프론트엔드: React.js
     - 개발 프레임워크: React
     - 개발 언어: Javascript
-    - UI: styled component, MUI
+    - UI: styled component, SCSS, MUI
     - 배포: Netlify
 * [백엔드](https://github.com/Sejong-DoctorPC/USPACE_BE)
 
@@ -41,7 +41,8 @@ https://uspace-sejong-doctorpc.netlify.app )
 
 ### 일반 회원
 * 주차 현황 조회 및 주차 정보 확인
-<img src="./img/user-mobile.png" width="124px" height="256px" title="관리자" alt="user-mobile"></img><br/>
+
+<img src="./img/user-mobile.png" width="124px" height="256px" title="일반 사용자" alt="user-mobile"></img><br/>
 
 ---
 

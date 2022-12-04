@@ -1,39 +1,72 @@
 import React from "react";
 import styled from "styled-components";
+//Components
+import ProjectBox from "../Elements/ProjectBox";
+
 // Assets
-import ContactImg1 from "../../assets/img/contact-1.png";
-import ContactImg2 from "../../assets/img/contact-2.png";
-import ContactImg3 from "../../assets/img/contact-3.png";
+import ContactImg1 from "../../assets/img/contact-1.jpg";
+
+import ContactImg2 from "../../assets/img/kjy.jpg";
+import ContactImg3 from "../../assets/img/kyh.jpg";
+import ContactImg4 from "../../assets/img/psh.jpg";
+import ContactImg5 from "../../assets/img/yjw.jpg";
+import ContactImg6 from "../../assets/img/lyb.jpg";
+
 
 export default function Contact() {
   return (
     <Wrapper id="contact">
-      <div className="lightBg">
+      <div className="lightBg" >
         <div className="container">
           <HeaderInfo>
-            <h1 className="font40 extraBold">USPACE의 팀원을 소개합니다!</h1>
+            <h1 className="font40 extraBold">닥터피시의 팀원을 소개합니다!</h1>
             <p className="font13">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-              <br />
-              labore et dolore magna aliquyam erat, sed diam voluptua.
+              팀 닥터피시의 사랑스러운 팀원들을 만나보세요!
             </p>
           </HeaderInfo>
-          <div className="row" style={{ paddingBottom: "30px" }}>
-            
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 flex">
-              <div style={{ width: "50%" }} className="flexNullCenter flexColumn">
-                <ContactImgBox>
-                  <img src={ContactImg1} alt="office" className="radius6" />
-                </ContactImgBox>
-                <ContactImgBox>
-                  <img src={ContactImg2} alt="office" className="radius6" />
-                </ContactImgBox>
-              </div>
-              <div style={{ width: "50%" }}>
-                <div style={{ marginTop: "100px" }}>
-                  <img src={ContactImg3} alt="office" className="radius6" />
-                </div>
-              </div>
+
+          <div className="row textCenter">
+            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <ProjectBox
+                img={ContactImg1}
+                title="인영-강"
+                text="스마트기기공학전공 20학번 / 프론트엔드"
+              />
+            </div>
+            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <ProjectBox
+                img={ContactImg2}
+                title="진영 코"
+                text="무인이동체공학전공 20학번 / 임베디드"
+              />
+            </div>
+            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <ProjectBox
+                img={ContactImg3}
+                title="용현 킴"
+                text="무인이동체공학전공 21학번 / 백엔드"
+              />
+            </div>  
+            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <ProjectBox
+                img={ContactImg4}
+                title="시현 팍"
+                text="지능기전공학부 22학번 / 임베디드"
+              />
+            </div>
+            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <ProjectBox
+                img={ContactImg5}
+                title="jiya 유"
+                text="무인이동체공학전공 21학번 / 인공지능"
+              />
+            </div>          
+            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <ProjectBox
+                img={ContactImg6}
+                title="용빈리"
+                text="무인이동체공학전공 19학번 / 임베디드"
+              />
             </div>
           </div>
         </div>
@@ -44,58 +77,12 @@ export default function Contact() {
 
 const Wrapper = styled.section`
   width: 100%;
+  margin-bottom: 30px;
 `;
 const HeaderInfo = styled.div`
   padding: 70px 0 30px 0;
   @media (max-width: 860px) {
     text-align: center;
-  }
-`;
-const Form = styled.form`
-  padding: 70px 0 30px 0;
-  input,
-  textarea {
-    width: 100%;
-    background-color: transparent;
-    border: 0px;
-    outline: none;
-    box-shadow: none;
-    border-bottom: 1px solid #707070;
-    height: 30px;
-    margin-bottom: 30px;
-  }
-  textarea {
-    min-height: 100px;
-  }
-  @media (max-width: 860px) {
-    padding: 30px 0;
-  }
-`;
-const ButtonInput = styled.input`
-  border: 1px solid #7620ff;
-  background-color: #7620ff;
-  width: 100%;
-  padding: 15px;
-  outline: none;
-  color: #fff;
-  :hover {
-    background-color: #580cd2;
-    border: 1px solid #7620ff;
-    color: #fff;
-  }
-  @media (max-width: 991px) {
-    margin: 0 auto;
-  }
-`;
-const ContactImgBox = styled.div`
-  max-width: 180px; 
-  align-self: flex-end; 
-  margin: 10px 30px 10px 0;
-`;
-const SumbitWrapper = styled.div`
-  @media (max-width: 991px) {
-    width: 100%;
-    margin-bottom: 50px;
   }
 `;
 
