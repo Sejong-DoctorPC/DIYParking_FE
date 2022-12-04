@@ -6,8 +6,9 @@ import axios from '../../api/axios';
 
 import "./Status.css";
 
+const MODE_URL = '/setmode';
+
 const Status = () => {
-    const MODE_URL = '/setmode';
 
     const MODE_SELECT = ['기본', '캠핑', '영화', '재난'];
     
@@ -32,7 +33,7 @@ const Status = () => {
             {
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
+                    //"Access-Control-Allow-Origin": "*",
                 },
             });
             console.log(JSON.stringify(response?.data));
