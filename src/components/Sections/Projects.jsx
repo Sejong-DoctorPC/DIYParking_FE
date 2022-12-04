@@ -41,8 +41,7 @@ export default function Projects() {
               <ProjectBox
                 img={ProjectImg3}
                 title="로고3"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                action={() => alert("clicked")}
+                text="다소 🌟네온사인🌟 같은 심플 디자인의 로고입니다."
               />
             </div>
           </div>

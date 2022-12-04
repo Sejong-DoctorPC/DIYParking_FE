@@ -5,10 +5,13 @@ import ProjectBox from "../Elements/ProjectBox";
 
 // Assets
 import ContactImg1 from "../../assets/img/contact-1.jpg";
-import ContactImg11 from "../../assets/img/contact-1.png";
 
-import ContactImg2 from "../../assets/img/contact-2.png";
-import ContactImg3 from "../../assets/img/contact-3.png";
+import ContactImg2 from "../../assets/img/kjy.jpg";
+import ContactImg3 from "../../assets/img/kyh.jpg";
+import ContactImg4 from "../../assets/img/psh.jpg";
+import ContactImg5 from "../../assets/img/yjw.jpg";
+import ContactImg6 from "../../assets/img/lyb.jpg";
+
 
 export default function Contact() {
   return (
@@ -32,35 +35,35 @@ export default function Contact() {
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <ProjectBox
-                img={ContactImg11}
+                img={ContactImg2}
                 title="진영 코"
                 text="무인이동체공학전공 20학번 / 임베디드"
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <ProjectBox
-                img={ContactImg11}
-                title="용현킴"
+                img={ContactImg3}
+                title="용현 킴"
                 text="무인이동체공학전공 21학번 / 백엔드"
               />
             </div>  
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <ProjectBox
-                img={ContactImg11}
+                img={ContactImg4}
                 title="시현 팍"
                 text="지능기전공학부 22학번 / 임베디드"
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <ProjectBox
-                img={ContactImg11}
+                img={ContactImg5}
                 title="jiya 유"
                 text="무인이동체공학전공 21학번 / 인공지능"
               />
             </div>          
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <ProjectBox
-                img={ContactImg11}
+                img={ContactImg6}
                 title="용빈리"
                 text="무인이동체공학전공 19학번 / 임베디드"
               />

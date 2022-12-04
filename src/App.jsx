@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 //import Logout from './pages/Logout';
 import RegisterPage from './pages/RegisterPage';
+import AdminParking from './pages/Admin/Parking';
 import Parking from './pages/Parking';
 import ParkingGet from './pages/ParkingGet';
 
@@ -16,7 +17,8 @@ const App = () => {
             <Route path = "/" element = { < FirstLanding/> }/> 
             <Route path = "/login"element = { < Login /> }/> 
             <Route path = "/register" element = { < RegisterPage /> } />
-            <Route path = "/admin/parking" element = { < Parking /> }/> 
+            <Route path = "/admin/parking" element = { < AdminParking /> }/>
+            <Route path = "/parking" element = { < Parking /> }/>
             <Route path = "/parking-get" element = { < ParkingGet /> }/>
 
         </Routes> 
