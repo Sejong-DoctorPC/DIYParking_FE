@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import TopNavbar from "../../components/Nav/TopNavbar";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import Paper from '@mui/material/Paper';
 
 import "./Parking.css";
 import axios from "../../api/axios";
@@ -7,6 +9,8 @@ import { Button, Container } from "@mui/material";
 
 const RESERVE_URL = "/reserve";
 const CURRENT_STATUS_URL = "/current";
+const GET_OUT_URL = "/getout";
+
 
 const Parking = () => {
 
@@ -46,7 +50,7 @@ const Parking = () => {
     };
 
     const [zone, setZone] = useState(null);
-
+    
     const username = localStorage.getItem("Username");
     const isLoggedIn = localStorage.getItem("Log");
 
@@ -82,11 +86,48 @@ const Parking = () => {
             setError(err);
             console.log(err);
         } 
-    };       
-
+    };      
+    
     //const ZONE = -1;
     const inTime = new Date().toLocaleDateString('ko-kr')
-    const outTime = '00.00.00';
+
+    const [outTime, setOutTime] = useState(null);
+    const [fee, setFee] = useState(null);
+    
+    const handleGetOut = async (e) => {
+        e.preventDefault();
+        try {
+        // 요청이 시작 할 때에는 error 와 users 를 초기화하고
+        setError(null);
+        setOutTime(null);
+        setFee(null); // 데이터는 response.data 안에 들어있습니다.
+
+        // loading 상태를 true 로 바꿉니다.
+        setLoading(true);
+
+        const params = {"user": username};
+        const response = await axios.get(
+            GET_OUT_URL, 
+            {params},
+        {   
+            headers: {
+                "Content-Type": "application/json",
+                //"Access-Control-Allow-Origin": "*",
+            },
+        });
+
+        //console.log(response);
+        setOutTime(response.time); // 데이터는 response.data 안에 들어있습니다.
+        setFee(response.fee); // 데이터는 response.data 안에 들어있습니다.
+        localStorage.removeItem("isParked");
+        window.location.replace("/parking");
+
+        } catch (e) {
+        setError(e);
+        }
+        setLoading(false);
+    };
+
     
     return (
         <>
@@ -104,8 +145,10 @@ const Parking = () => {
                 <h3>오늘도 행복한 하루 되세요 *^^*</h3>
                 }
 
-                {localStorage.getItem('isParked') ?             
-                    <h3>{localStorage.getItem("zone")} 구역에 주차 완료 ✅</h3>:
+                {localStorage.getItem('isParked') && localStorage.getItem('Log') ?             
+                    <h3>{localStorage.getItem("zone")} 구역에 주차 완료 ✅ 
+                        <button className="w-btn w-btn-red" onClick={handleGetOut}>출차하기</button> 
+                    </h3>:
                     <button className="w-btn w-btn-red" onClick={handleSubmit}>예약하기</button> 
                 } 
                 <div id="layout"></div>       
@@ -122,10 +165,44 @@ const Parking = () => {
                     <div class="seat taken"></div> <div class="txt">이용 불가</div>
                     <div class="seat selected"></div> <div class="txt">예약 완료</div>
                 </div>
-
-                <h3>입차 시간: {inTime}</h3>
-                <h3 id="out">출차 시간: {outTime}</h3>
-                <h3 id="fare">예상 요금: {}원</h3>        
+            </Container>
+            <Container>
+            <TableContainer id="table" component={Paper}>
+                <Table sx={{ minWidth: 300 }}  aria-label="simple table">
+                        <TableHead>
+                        <TableRow>
+                            <TableCell>주차 정보</TableCell>
+                            <TableCell align="right"></TableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    입차 시간       
+                                </TableCell>
+                                <TableCell align="right">{inTime}</TableCell>                                
+                            </TableRow>
+                            <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    출차시간       
+                                </TableCell>
+                                <TableCell align="right">{outTime}</TableCell>                                
+                            </TableRow>  
+                            <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    주차 요금    
+                                </TableCell>
+                                <TableCell align="right">{fee}</TableCell>                                
+                            </TableRow>                        
+                        </TableBody>
+                    </Table>
+            </TableContainer>
             </Container>
         </>
     );
