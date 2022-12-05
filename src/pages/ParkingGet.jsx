@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from "../api/axios"
 
-const PARKING_URL = '/parking';
+const CURRENT_STATUS_URL = "/current";
 
 // async/await 사용을 원한다면, 함수 외부에 `async` 키워드를 추가하세요.
 function ParkingGet() {
-    const [cars, setCars] = useState(null);
+    const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
   
@@ -16,7 +16,7 @@ function ParkingGet() {
         setCars(null);
         // loading 상태를 true 로 바꿉니다.
         setLoading(true);
-        const response = await axios.get(PARKING_URL);
+        const response = await axios.get(CURRENT_STATUS_URL);
         //console.log(response);
         setCars(response.data); // 데이터는 response.data 안에 들어있습니다.
       } catch (e) {
@@ -39,8 +39,8 @@ function ParkingGet() {
         <div>
           <ul>
             {cars.map(car => (
-              <li key={car._id}>
-                {car.zone} ({car.type})
+              <li key={car.parker}>
+                {car.zone} ({car.state})
               </li>
             ))}
           </ul>
