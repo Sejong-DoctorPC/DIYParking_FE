@@ -5,14 +5,42 @@ import { Link } from "react-scroll";
 import CloseIcon from "../../assets/svg/CloseIcon";
 import LogoIcon from "../../assets/svg/Logo";
 
+import axios from '../../api/axios';
+const LOGOUT_URL = '/users/logout';
+
 export default function Sidebar({ sidebarOpen, toggleSidebar }) {
+
+  const isLoggedIn = localStorage.getItem("Log");
+
+  const handleClick = () => {
+    alert('먼저 로그인해주세요!');
+  };
+
+  const handleLogout  = async (e) => {
+    e.preventDefault();
+    try {
+    // 로그아웃을 위한 메소드 제작
+      axios
+      .get(LOGOUT_URL, null, {
+        "Content-Type": "application/json",
+        //withCredentials: true,
+        })
+      alert('로그아웃 성공!');
+      localStorage.clear();
+      window.location.replace('/');
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+
   return (
     <Wrapper className="animate darkBg" sidebarOpen={sidebarOpen}>
       <SidebarHeader className="flexSpaceCenter">
         <div className="flexNullCenter">
           <LogoIcon />
           <h1 className="whiteColor font20" style={{ marginLeft: "15px" }}>
-            fanatic
+            USPACE
           </h1>
         </div>
         <CloseBtn onClick={() => toggleSidebar(!sidebarOpen)} className="animate pointer">
@@ -94,14 +122,18 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
       </UlStyle>
       <UlStyle className="flexSpaceCenter">
         <li className="semiBold font15 pointer">
-          <a href="/login" style={{ padding: "10px 30px 10px 0" }} className="whiteColor">
-            로그인
-          </a>
+        {isLoggedIn ?  <a href="/"  onClick={handleLogout} style={{ padding: "10px 30px 10px 0" }} className="whiteColor">로그아웃</a> 
+                : <a href="/login" style={{ padding: "10px 30px 10px 0"}} className="whiteColor">로그인</a>
+        }
         </li>
         <li className="semiBold font15 pointer flexCenter">
-          <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
-            시작하기
-          </a>
+        {isLoggedIn ?  <a href="/parking" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
+                예약하기</a> 
+                : 
+                <a href="/login" onClick={handleClick} className="radius8 lightBg" style={{ padding: "10px 15px"}}>
+                  시작하기</a>
+          }
+
         </li>
       </UlStyle>
     </Wrapper>

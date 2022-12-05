@@ -13,7 +13,7 @@ import { AccountContext } from "./accountContext";
 import Home from "../../pages/Home";
 import axios from '../../api/axios';
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REGEX = /\d{2}[ㄱ-ㅎ가-힣]\d{4}/; 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/join';
 //const REGISTER_URL = '/register';
@@ -185,7 +185,7 @@ export function SignupForm(props) {
   
               <SubmitButton type="submit"
                 disabled={!validName || !validPwd || !validMatch ? true : false}
-              >SignIn
+              >회원가입
               </SubmitButton>
             </FormContainer>
             <Marginer direction="vertical" margin={10} />

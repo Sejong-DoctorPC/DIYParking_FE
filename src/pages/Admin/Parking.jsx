@@ -1,13 +1,16 @@
 import Status from "../../components/ParkingStatus/Status";
+import { Container } from "@mui/material";
 
-
+import "./Parking.css";
 
 const AdminParking = () => {
     return (
-      <div>
-        <h3>🎉 관리자 페이지</h3>
+      <Container>
+        <div className="header">
+            <h3>🚗 관리자 페이지 🚗</h3>
+        </div>
         <Status></Status>
-      </div>
+      </Container>
     );
   };
   
