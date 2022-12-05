@@ -45,7 +45,7 @@ const Parking = () => {
     const isStatus = (zone, state) =>{
         
         if (zone == localStorage.getItem("zone")) return "item selected";
-        else if (state) return "item taken";
+        else if (state == 2) return "item taken";
         else return "item"      
     };
 
@@ -116,11 +116,12 @@ const Parking = () => {
             },
         });
 
-        //console.log(response);
-        setOutTime(response.time); // 데이터는 response.data 안에 들어있습니다.
-        setFee(response.fee); // 데이터는 response.data 안에 들어있습니다.
+        console.log(response.data);
+        setOutTime(response.data.time); // 데이터는 response.data 안에 들어있습니다.
+        setFee(response.data.fee); // 데이터는 response.data 안에 들어있습니다.
         localStorage.removeItem("isParked");
-        window.location.replace("/parking");
+        localStorage.removeItem("zone");
+        //window.location.replace("/parking");
 
         } catch (e) {
         setError(e);
@@ -128,6 +129,9 @@ const Parking = () => {
         setLoading(false);
     };
 
+    const makeTimeString = (time) => {
+        return parseFloat(time.slice(0, 5)) * 100; 
+    }
     
     return (
         <>
@@ -162,7 +166,7 @@ const Parking = () => {
 
                 <div id="legend">
                     <div class="seat"></div> <div class="txt">이용 가능</div>
-                    <div class="seat taken"></div> <div class="txt">이용 불가</div>
+                    <div class="seat taken"></div> <div class="txt">이용 중</div>
                     <div class="seat selected"></div> <div class="txt">예약 완료</div>
                 </div>
             </Container>
@@ -188,7 +192,7 @@ const Parking = () => {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    출차시간       
+                                    출차 시간       
                                 </TableCell>
                                 <TableCell align="right">{outTime}</TableCell>                                
                             </TableRow>  

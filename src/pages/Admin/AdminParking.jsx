@@ -3,9 +3,9 @@ import TopNavbar from "../../components/Nav/TopNavbar";
 
 import "./AdminParking.css";
 import axios from "../../api/axios";
-import { Button, Container } from "@mui/material";
+import { Button, Container, FormControl, NativeSelect} from "@mui/material";
 
-const RESERVE_URL = "/reserve";
+const MODE_URL = "/setmode";
 const CURRENT_STATUS_URL = "/current";
 
 const Parking = () => {
@@ -20,16 +20,18 @@ const Parking = () => {
     
     const fetchCars = async () => {
         try {
-        // 요청이 시작 할 때에는 error 와 users 를 초기화하고
-        setError(null);
-        setCars(null);
-        // loading 상태를 true 로 바꿉니다.
-        setLoading(true);
-        const response = await axios.get(CURRENT_STATUS_URL);
-        //console.log(response);
-        setCars(response.data); // 데이터는 response.data 안에 들어있습니다.
-        } catch (e) {
-        setError(e);
+            // 요청이 시작 할 때에는 error 와 users 를 초기화하고
+            setError(null);
+            setCars(null);
+            // loading 상태를 true 로 바꿉니다.
+            setLoading(true);
+            const response = await axios.get(CURRENT_STATUS_URL);
+            //console.log(response);
+            setCars(response.data); // 데이터는 response.data 안에 들어있습니다.
+        } 
+        
+        catch (e) {
+            setError(e);
         }
         setLoading(false);
     };
@@ -38,45 +40,65 @@ const Parking = () => {
         fetchCars();
     }, []);
 
-    const [zone, setZone] = useState(null);
+
+    const leftCount = () => {
+        var count = 0;
+        cars.map(car => {
+            if (car.state==1) count++;
+        });
+
+        return count;
+    }
+
+    //const left = leftCount(cars);
 
     const username = localStorage.getItem("Username");
-    const isLoggedIn = localStorage.getItem("Log");
+    const isLoggedIn = localStorage.getItem("Log");     
+    
+    const PARKING_MODE = ['기본', '캠핑', '영화관', '재난 대피'];
+    const [ mode, setMode ] = useState(localStorage.getItem("mode"));
 
-    const handleSubmit = async (e) => {
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setMode(value)
+    };
+
+    const showModeNum = (mode) => {
+        if(mode == '기본') return 0;
+        else if(mode == '캠핑') return 1;
+        else if(mode == '영화관') return 2;
+        else if(mode == '재난 대피') return 3;
+    };
+
+    const handleMode = async (e) => {
         e.preventDefault();
         try {
-            // 요청이 시작 할 때에는 error 와 users 를 초기화하고
-            setError(null);
-            setZone(null);
-            
-            const params = {"user": username};
-            const response = await axios.get(
-                RESERVE_URL, 
-                {params},
-            {   
-                headers: {
-                    "Content-Type": "application/json",
-                    //"Access-Control-Allow-Origin": "*",
-                },
-            });
+            if (window.confirm('정말 주차장 모드를 변경하시겠습니까?')){
+                setError(null);
+                setMode(null);
 
-            localStorage.setItem('isParked', true);
-            localStorage.setItem('zone', response.data.zone)
-            setZone(response.data.zone); // 데이터는 response.data 안에 들어있습니다.
+                const params = {"mode": showModeNum(mode)};
+                const response = await axios.get(
+                    MODE_URL, 
+                    {params},
+                {   
+                    headers: {
+                        "Content-Type": "application/json",
+                        //"Access-Control-Allow-Origin": "*",
+                    },
+                });
+                console.log(response.data);
+                localStorage.setItem("mode", mode);
+                setMode(mode);
+                //setCars(response.data);
+                window.location.replace("/admin/parking");    
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
-            console.log(zone);
-            //alert(`주차장 예약하기 성공! ${response.data.zone}번에 주차하세요😀`);
-            alert(localStorage.getItem('zone') + '구역에 주차하세요!');
-
-            //window.location.replace("/parking");
-        
-        } catch(err) {
-            setError(err);
-            console.log(err);
-        } 
-    };       
-    
     return (
         <>
             <TopNavbar />
@@ -90,9 +112,24 @@ const Parking = () => {
                     </span>
                     </div>
                     :
-                <h3>오늘도 행복한 하루 되세요 *^^*</h3>
+                <h3>현재 주차 모드는 {mode}입니다🚗</h3>
                 }
-
+                <div id="form">
+                    <FormControl id="mode-option">
+                        <NativeSelect
+                            defaultValue={mode}
+                            value={mode}
+                            onChange={(e) => handleChange(e)}
+                        >
+                        {
+                        PARKING_MODE.map((mode, idx) => {
+                            return <option key={idx} value={mode}>{mode}모드</option>
+                        })
+                        }
+                        </NativeSelect>
+                        <Button variant="contained" onClick={handleMode} style={{"margin-left": "10px"}}>모드 변경</Button>     
+                    </FormControl>
+                </div>
                 <div id="layout"></div>       
                 <div className="parent">
                     {cars && cars.map(car => (
@@ -101,12 +138,11 @@ const Parking = () => {
                         </div>
                     ))}
                 </div>
-                
+
                 <div id="legend">
-                    <div clasName="seat"></div> <div className="txt">이용 가능</div>
-                    <div className="seat taken"></div> <div className="txt">이용 불가</div>
-                    <div className="seat selected"></div> <div className="txt">예약 완료</div>
+                    <div class="seat taken"></div> <div class="txt">이용 중</div>
                 </div>
+
 
             </Container>
         </>
