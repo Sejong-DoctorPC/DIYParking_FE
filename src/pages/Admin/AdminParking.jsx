@@ -85,7 +85,7 @@ const Parking = () => {
                 
                 {!isLoggedIn ? 
                     <div id="notify">
-                    <span>임시 아이디: Admin1, 임시 패스워드: Admin1234@ 로                         
+                    <span>임시 아이디: admin01, 임시 패스워드: Admin1234@ 로                         
                         <Button variant="text" id="login"><a href="/login">로그인</a></Button>해주세요!      
                     </span>
                     </div>

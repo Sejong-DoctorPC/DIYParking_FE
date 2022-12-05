@@ -3,9 +3,16 @@
     height: 100vh;
 }
 
+#table {
+    margin-top: -50px;
+}
+
 @media (max-width: 420px) {
     #welcome {
         font-size: 27px;
+    }
+    #table {
+        margin-top: -200px;
     }
 }
 
@@ -90,18 +97,39 @@ button {
     background: #87ff96;
 }
 
+tr {
+    height: 40px !important;
+}
+
+th {
+    max-width: 125px;
+    min-width: 125px;
+    padding: 0 !important;
+    overflow-x: auto;
+    white-space: nowrap;
+    text-align: center !important;
+}
+
+td {
+    height: 40px !important;
+    padding: 5px !important;
+    text-align: center !important;
+}
+
 
 /* (C) LEGEND */
 
 #legend {
     display: flex;
     justify-content: center;
-    margin: 25px;
+    margin-top: 25px;
+    height: 20px;
 }
 
 #legend .txt {
     display: flex;
     align-items: center;
+    margin: 20px;
 }
 
 #fare,

@@ -13,7 +13,8 @@ import { AccountContext } from "./accountContext";
 import Home from "../../pages/Home";
 import axios from '../../api/axios';
 
-const USER_REGEX = /\d{2}[ㄱ-ㅎ가-힣]\d{4}/; 
+const USER_REGEX = /\d{2}[ㄱ-ㅎ가-힣]\d{4}/;
+const ADMIN_REGEX = /[a-z]{5}\d{2}/; 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/join';
 //const REGISTER_URL = '/register';
@@ -44,7 +45,8 @@ export function SignupForm(props) {
 	}, []);
 
 	useEffect(() => {
-		setValidName(USER_REGEX.test(user));
+    if(user.includes('admin')) setValidName(ADMIN_REGEX.test(user))
+		else setValidName(USER_REGEX.test(user));
 	}, [user]);
 
 	useEffect(() => {
@@ -59,7 +61,7 @@ export function SignupForm(props) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// if button enabled with JS hack
-		const v1 = USER_REGEX.test(user);
+		const v1 = user.includes('admin') ? ADMIN_REGEX.test(user): USER_REGEX.test(user);
 		const v2 = PWD_REGEX.test(pwd);
 		if (!v1 || !v2) {
 			setErrMsg('Invalid Entry');
@@ -120,7 +122,6 @@ export function SignupForm(props) {
               {errMsg}
             </p>
             <FormContainer onSubmit={handleSubmit}>
- 
               <Input
                 type="text"
                 id="username"
@@ -162,7 +163,6 @@ export function SignupForm(props) {
               >
               </p>
   
-             
               <Input
                 type="password"
                 id="confirm_pwd"
