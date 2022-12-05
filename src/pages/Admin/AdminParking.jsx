@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import TopNavbar from "../../components/Nav/TopNavbar";
 
-import "./Parking.css";
+import "./AdminParking.css";
 import axios from "../../api/axios";
 import { Button, Container } from "@mui/material";
 
@@ -37,13 +37,6 @@ const Parking = () => {
     useEffect(() => {
         fetchCars();
     }, []);
-    
-    const isStatus = (zone, state) =>{
-        
-        if (zone == localStorage.getItem("zone")) return "item selected";
-        else if (state) return "item taken";
-        else return "item"      
-    };
 
     const [zone, setZone] = useState(null);
 
@@ -83,10 +76,6 @@ const Parking = () => {
             console.log(err);
         } 
     };       
-
-    //const ZONE = -1;
-    const inTime = new Date().toLocaleDateString('ko-kr')
-    const outTime = '00.00.00';
     
     return (
         <>
@@ -96,7 +85,7 @@ const Parking = () => {
                 
                 {!isLoggedIn ? 
                     <div id="notify">
-                    <span>임시 아이디: 63공1000, 임시 패스워드: User0101@ 로                         
+                    <span>임시 아이디: Admin1, 임시 패스워드: Admin1234@ 로                         
                         <Button variant="text" id="login"><a href="/login">로그인</a></Button>해주세요!      
                     </span>
                     </div>
@@ -104,28 +93,21 @@ const Parking = () => {
                 <h3>오늘도 행복한 하루 되세요 *^^*</h3>
                 }
 
-                {localStorage.getItem('isParked') ?             
-                    <h3>{localStorage.getItem("zone")} 구역에 주차 완료 ✅</h3>:
-                    <button className="w-btn w-btn-red" onClick={handleSubmit}>예약하기</button> 
-                } 
                 <div id="layout"></div>       
                 <div className="parent">
                     {cars && cars.map(car => (
-                        <div className={isStatus(car.zone, car.state)} key={car.parker}>
+                        <div className={car.state ? "item taken" : "item"} key={car.parker}>
                         {car.zone}
                         </div>
                     ))}
                 </div>
-
+                
                 <div id="legend">
-                    <div class="seat"></div> <div class="txt">이용 가능</div>
-                    <div class="seat taken"></div> <div class="txt">이용 불가</div>
-                    <div class="seat selected"></div> <div class="txt">예약 완료</div>
+                    <div clasName="seat"></div> <div className="txt">이용 가능</div>
+                    <div className="seat taken"></div> <div className="txt">이용 불가</div>
+                    <div className="seat selected"></div> <div className="txt">예약 완료</div>
                 </div>
 
-                <h3>입차 시간: {inTime}</h3>
-                <h3 id="out">출차 시간: {outTime}</h3>
-                <h3 id="fare">예상 요금: {}원</h3>        
             </Container>
         </>
     );
