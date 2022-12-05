@@ -1,0 +1,90 @@
+.reservation {
+    width: 80%;
+    height: 100vh;
+}
+
+@media (max-width: 420px) {
+    #welcome {
+        font-size: 27px;
+    }
+}
+
+#welcome {
+    text-align: center;
+    margin-top: 90px;
+}
+
+h3 {
+    text-align: center;
+    margin: 30px;
+}
+
+button {
+    margin: 20px;
+}
+
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-red {
+    background-color: #ff5f2e;
+    color: #e1eef6;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+}
+
+.item {
+    background-color: ghostwhite;
+    color: gray;
+    border-radius: 10%;
+    box-shadow: #f1f1f1;
+    height: 40px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+/* (A) SEAT & "COLOR CODE" */
+
+.seat {
+    text-align: center;
+    padding: 20px 10px;
+    border-radius: 10px;
+    background: #f1f1f1;
+    width: 30px;
+}
+
+.taken {
+    background: #df0000;
+    color: #fff;
+}
+
+.selected {
+    background: #87ff96;
+}
+
+#fare,
+#out {
+    color: gray;
+}
+
+* {
+    font-family: arial, sans-serif;
+    box-sizing: border-box;
+}

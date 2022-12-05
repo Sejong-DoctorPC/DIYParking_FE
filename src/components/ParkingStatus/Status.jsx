@@ -1,8 +1,9 @@
-import { Container, Box, Tab, Tabs, Typography, Button, NativeSelect } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import { Container, Box, Tab, Tabs, Typography, NativeSelect } from '@mui/material';
+import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import { useState } from 'react';
 import axios from '../../api/axios';
+import { BoxContainer } from '../accountBox/common';
 
 import "./Status.css";
 
@@ -23,14 +24,22 @@ const Status = () => {
         else if(value=='재난') mode = 3;
         console.log(mode);
     }
-
+    const dummy = [
+        [0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 1, 0],
+    ];
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(
+            const params = {"mode": mode};
+            const response = await axios.get(
                 MODE_URL, 
-                JSON.stringify({mode}),
-            {
+                {params},
+            {   
                 headers: {
                     "Content-Type": "application/json",
                     //"Access-Control-Allow-Origin": "*",
@@ -65,8 +74,13 @@ const Status = () => {
                 })
                 }
             </NativeSelect>
-            <Button onClick={handleSubmit}>모드 변경</Button>
+            <Button varaint="contained" onClick={handleSubmit}>모드 변경</Button>
         </FormControl>
+        <BoxContainer>
+            { dummy.map((element, idx) => {
+                return <div class="seat"></div>
+            })}
+        </BoxContainer>
         <Container>   
             <div id="legend">
                 <div class="seat"></div> <div class="txt">이용 가능</div>

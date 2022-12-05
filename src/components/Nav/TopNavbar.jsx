@@ -24,6 +24,10 @@ export default function TopNavbar() {
 
   const isLoggedIn = localStorage.getItem("Log");
 
+  const handleClick = () => {
+    alert('먼저 로그인해주세요!');
+  };
+
   const handleLogout  = async (e) => {
     e.preventDefault();
     try {
@@ -86,12 +90,13 @@ export default function TopNavbar() {
           </UlWrapper>
           <UlWrapperRight className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              {isLoggedIn ?  <a href="/" style={{ padding: "10px 30px 10px 0" }}><button  onClick={handleLogout} style={{ backgroundColor: "white" }}>로그아웃 </button></a> : <a href="/login" style={{ padding: "10px 30px 10px 0"}}>로그인</a>}
+              {isLoggedIn ?  <a href="/"  onClick={handleLogout} style={{ padding: "10px 30px 10px 0" }}>로그아웃</a> 
+                : <a href="/login" style={{ padding: "10px 30px 10px 0"}}>로그인</a>}
             </li>
             <li className="semiBold font15 pointer flexCenter">
-              <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
-                시작하기
-              </a>
+              {isLoggedIn ?  <a href="/parking" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
+                예약하기</a> 
+                : <a href="/login" onClick={handleClick} className="radius8 lightBg" style={{ padding: "10px 15px"}}>시작하기</a>}
             </li>
           </UlWrapperRight>
         </NavInner>

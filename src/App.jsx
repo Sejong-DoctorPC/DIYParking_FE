@@ -3,7 +3,7 @@ import Login from './pages/Login';
 //import Logout from './pages/Logout';
 import RegisterPage from './pages/RegisterPage';
 import AdminParking from './pages/Admin/Parking';
-import Parking from './pages/Parking';
+import Parking from './pages/User/Parking';
 import ParkingGet from './pages/ParkingGet';
 
 import { Helmet } from "react-helmet";

@@ -39,7 +39,11 @@ export function LoginForm() {
         //window.location.href = "./userDetails";
         setUser('');
         setPwd('');
+        //로그인/로그아웃 여부 저장
         localStorage.setItem("Log", true);
+        //
+        localStorage.setItem("Username", user);
+        //새로고침
         window.location.replace("/");
     
       } catch(err) {
@@ -72,7 +76,7 @@ export function LoginForm() {
             type="password"
           />
           <SubmitButton type="submit">
-            Login
+            로그인
           </SubmitButton>
         </FormContainer>
       <Marginer direction="vertical" margin={10} />
