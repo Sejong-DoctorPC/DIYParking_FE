@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 //import Logout from './pages/Logout';
 import RegisterPage from './pages/RegisterPage';
-import AdminParking from './pages/Admin/Parking';
+import AdminParking from './pages/Admin/AdminParking';
 import Parking from './pages/User/Parking';
 import CustomParking from './pages/CustomParking';
 import ParkingGet from './pages/ParkingGet';
