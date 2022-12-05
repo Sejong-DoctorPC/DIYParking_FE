@@ -13,7 +13,7 @@ const Parking = () => {
     const [error, setError] = useState(null);
 
     const username = localStorage.getItem("Username");
-    
+    const isLoggedIn = localStorage.getItem("Log");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -63,9 +63,20 @@ const Parking = () => {
             <TopNavbar />
             <Container className="reservation">
                 <h1 id="welcome"> 안녕하세요, {username}님!</h1>
+                
+                {!isLoggedIn ? 
+                    <div id="notify">
+                    <span>임시 아이디: 75공3014, 임시 패스워드: User0101@ 로                         
+                        <Button variant="text" id="login"><a href="/login">로그인</a></Button>해주세요!      
+                    </span>
+                    </div>
+                    :
+                <h3>오늘도 행복한 하루 되세요 *^^*</h3>
+                }
+
                 {localStorage.getItem('isParked') ?             
                     <h3>{localStorage.getItem("zone")} 구역에 주차 완료 ✅</h3>:
-                    <button className="w-btn w-btn-red"onClick={handleSubmit}>예약하기</button> 
+                    <button className="w-btn w-btn-red" onClick={handleSubmit}>예약하기</button> 
                 } 
                 <div id="layout"></div>       
                 <div className="parent">

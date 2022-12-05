@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import RegisterPage from './pages/RegisterPage';
 import AdminParking from './pages/Admin/Parking';
 import Parking from './pages/User/Parking';
+import CustomParking from './pages/CustomParking';
 import ParkingGet from './pages/ParkingGet';
 
 import { Helmet } from "react-helmet";
@@ -19,7 +20,7 @@ const App = () => {
             <Route path = "/register" element = { < RegisterPage /> } />
             <Route path = "/admin/parking" element = { < AdminParking /> }/>
             <Route path = "/parking" element = { < Parking /> }/>
-            <Route path = "/parking-get" element = { < ParkingGet /> }/>
+            <Route path = "/parking-custom" element = { < CustomParking /> }/>
 
         </Routes> 
 
