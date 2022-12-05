@@ -21,6 +21,7 @@ const App = () => {
             <Route path = "/admin/parking" element = { < AdminParking /> }/>
             <Route path = "/parking" element = { < Parking /> }/>
             <Route path = "/parking-custom" element = { < CustomParking /> }/>
+            <Route path = "/parking-get" element = { < ParkingGet /> }/>
 
         </Routes> 
 
