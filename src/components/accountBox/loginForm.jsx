@@ -43,6 +43,8 @@ export function LoginForm() {
         localStorage.setItem("Log", true);
         //
         localStorage.setItem("Username", user);
+        localStorage.setItem("mode", "기본");
+        
         //새로고침
         window.location.replace("/");
     

@@ -90,6 +90,15 @@ button {
     background: #87ff96;
 }
 
+#form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#mode-option {
+    display: inline;
+}
+
 
 /* (C) LEGEND */
 
