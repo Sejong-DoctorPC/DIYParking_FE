@@ -202,7 +202,7 @@ const Parking = () => {
                                 <TableCell component="th" scope="row">
                                     주차 요금    
                                 </TableCell>
-                                <TableCell align="right">{fee}</TableCell>                                
+                                <TableCell align="right">{fee}원</TableCell>                                
                             </TableRow>                        
                         </TableBody>
                     </Table>
