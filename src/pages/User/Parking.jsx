@@ -194,7 +194,7 @@ const Parking = () => {
                                 <TableCell component="th" scope="row">
                                     출차 시간       
                                 </TableCell>
-                                <TableCell align="right">{outTime}</TableCell>                                
+                                <TableCell align="right">2022. 12. 6.</TableCell>                                
                             </TableRow>  
                             <TableRow
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
